@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="isUserLoggedIn">
+  <h3 class="navbar-brand logo">BackOffice System</h3>
+  &nbsp;&nbsp;&nbsp;
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div
+    class="collapse navbar-collapse"
+    id="navbarSupportedContent"
+    [hidden]="authoriser"
+  >
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a
+          class="nav-link"
+          [hidden]="authoriser"
+          routerLink="/"
+          style="padding-left: 75px; padding-right: 75px; white-space: 10px;"
+          >Home <span class="sr-only">(current)</span></a
+        >
+        <a
+          class="nav-link"
+          [hidden]="!authoriser"
+          routerLink="/authoriser"
+          style="padding-left: 75px; padding-right: 75px; white-space: 10px;"
+          >Home <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          [hidden]="authoriser"
+          [routerLink]="['/createNew']"
+          routerLinkActive="active"
+          style="padding-left: 75px; padding-right: 75px; white-space: 10px;"
+          >Create New Account</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          [hidden]="authoriser"
+          [routerLink]="['/home', 1]"
+          routerLinkActive="active"
+          style="padding-left: 75px; padding-right: 75px; white-space: 10px;"
+          >List All Captured</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          [hidden]="authoriser"
+          [routerLink]="['/home', 3]"
+          routerLinkActive="active"
+          style="padding-left: 75px; padding-right: 75px; white-space: 10px;"
+          >List Active Accounts</a
+        >
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          (click)="logout()"
+          style="cursor: pointer;"
+          style="padding-left: 75px; padding-right: 75px; white-space: 10px;"
+          >LogOut</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>

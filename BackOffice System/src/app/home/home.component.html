@@ -1,0 +1,78 @@
+﻿<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.debug.js"></script>
+<h6>Welcome back {{ currentUser }}</h6>
+<h1 [hidden]="!rejectedAccounts" style="width: 45%; float: left;">
+  Rejected Accounts List Page
+</h1>
+<h1 [hidden]="!hideData" style="width: 45%; float: left;">
+  Submitted Accounts List Page
+</h1>
+<h1 [hidden]="!activeAccount" style="width: 45%; float: left;">
+  Created Accounts List Page
+</h1>
+<img
+  src="https://www.pngfind.com/pngs/m/350-3500642_pdf-icon-download-download-hd-png-download.png"
+  alt="image"
+  style="/* size: auto; */ height: 77px; float: right;"
+  (click)="generatePdf()"
+/>
+&nbsp;&nbsp;
+
+<img
+  src="https://png.pngtree.com/png-clipart/20190630/original/pngtree-csv-file-document-icon-png-image_4166827.jpg"
+  alt="image"
+  style="/* size: auto; */ height: 77px; float: right;"
+  (click)="generateCsv()"
+/>
+
+<!-- <button
+  class="btn btn-primary btn-link"
+  (click)="generatePdf()"
+  type="button"
+  style="float: right;"
+>
+  Save as Pdf
+</button> -->
+<!-- <button
+  class="btn btn-primary btn-link"
+  (click)="generateCsv()"
+  type="button"
+  style="float: right;"
+>
+  Save as csv
+</button> -->
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th [hidden]="!activeAccount">Account Id</th>
+      <th>Reference Id</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Date Applied</th>
+      <th>Passport No.</th>
+      <th>UUid</th>
+      <th>Remarks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let account of accounts">
+      <td [hidden]="!activeAccount">{{ account.accountId }}</td>
+      <td>{{ account.id }}</td>
+      <td>{{ account.firstName }}</td>
+      <td>{{ account.lastName }}</td>
+      <td>{{ account.date }}</td>
+      <td>{{ account.proof.passportNumber }}</td>
+      <td>{{ account.proof.uuid }}</td>
+      <td>{{ account.remarks }}</td>
+      <td>
+        <button
+          class="btn btn-primary"
+          [routerLink]="['/createNew', account.id]"
+          type="button"
+          [hidden]="activeAccount"
+        >
+          Edit Data
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

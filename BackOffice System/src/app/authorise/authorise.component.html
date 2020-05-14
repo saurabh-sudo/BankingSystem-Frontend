@@ -1,0 +1,36 @@
+<h6>Welcome back {{ currentUser }}</h6>
+<h1>Pending Approvals</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Reference Id</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Date Applied</th>
+      <th>Passport No.</th>
+      <th>Status?</th>
+      <th>Remarks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let account of accounts">
+      <td>{{ account.id }}</td>
+      <td>{{ account.firstName }}</td>
+      <td>{{ account.lastName }}</td>
+      <td>{{ account.date }}</td>
+      <td>{{ account.proof.passportNumber }}</td>
+      <td>{{ account.accountStatus }}</td>
+      <td>{{ account.remarks }}</td>
+      <td>
+        <button
+          class="btn btn-primary"
+          [routerLink]="['/createNew', account.id]"
+          type="button"
+        >
+          Open Request
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

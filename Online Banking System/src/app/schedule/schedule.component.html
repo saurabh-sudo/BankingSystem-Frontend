@@ -1,0 +1,119 @@
+<div
+  [hidden]="scheduleComplete"
+  style="height: 90vh; padding-left: 21px; padding-right: 21px;"
+>
+  <button
+    type="button"
+    class="btn btn-secondary btn-sm m-2"
+    (click)="addData()"
+  >
+    Add a new Schedule
+  </button>
+  <div [formGroup]="scheduleForm">
+    <div formArrayName="schedule">
+      <div class="man">
+        <div
+          class="form-group row"
+          *ngFor="let scheduleGroup of scheduleForm.get('schedule').controls"
+          [formGroup]="scheduleGroup"
+        >
+          <div class="form-group col-6">
+            <label>Recipient Name </label>
+            <input
+              type="text"
+              formControlName="recipientName"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group col-6">
+            <label>Account No of Recipient *</label>
+            <input
+              type="text"
+              [attr.disabled]="authoriser ? '' : null"
+              formControlName="recipientAccountNo"
+              class="form-control"
+            />
+            <small
+              class="form-text text-danger"
+              *ngIf="
+                scheduleGroup.controls['recipientAccountNo'].invalid &&
+                (scheduleGroup.controls['recipientAccountNo'].dirty ||
+                  scheduleGroup.controls['recipientAccountNo'].touched)
+              "
+              >Account Number is Invalid
+            </small>
+          </div>
+          <div class="form-group col-4">
+            <label>How much Money you want to transfer *</label>
+            <input
+              type="text"
+              formControlName="amount"
+              name="amount"
+              class="form-control"
+              required
+            />
+            <small
+              class="form-text text-danger"
+              *ngIf="
+                scheduleGroup.controls['amount'].invalid &&
+                (scheduleGroup.controls['amount'].dirty ||
+                  scheduleGroup.controls['amount'].touched)
+              "
+              >Amount entered is invalid or Greater than Balance Remaining
+            </small>
+          </div>
+
+          <div class="form-group col-4">
+            <label>Select Account from which to transfer</label>
+            <select formControlName="accountId" class="form-control">
+              <option
+                *ngFor="let account of accounts"
+                [value]="account.accountId"
+                >{{ account.accountId }}</option
+              >
+            </select>
+          </div>
+          <div class="form-group col-4">
+            <label>Scheduled Date</label>
+            <input type="date" formControlName="dates" class="form-control" />
+            <small
+              class="form-text text-danger"
+              *ngIf="
+                scheduleGroup.controls['dates'].invalid &&
+                (scheduleGroup.controls['dates'].dirty ||
+                  scheduleGroup.controls['dates'].touched)
+              "
+              >Date is out of Range
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button
+        class="btn btn-primary"
+        [hidden]="!viewSaveButton"
+        (click)="onSubmit()"
+        [disabled]="!scheduleForm.valid"
+        type="submit"
+      >
+        Save</button
+      >&nbsp;&nbsp;&nbsp;&nbsp;
+
+      <button
+        class="btn btn-primary"
+        [hidden]="!viewSaveButton"
+        (click)="cancelRequest()"
+        type="button"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+<div *ngIf="scheduleComplete">
+  <h3>Payment scheduled on selected Date</h3>
+  <a class="nav-link" [routerLink]="['/schedule']" routerLinkActive="active"
+    >schedule another Transaction</a
+  >
+</div>

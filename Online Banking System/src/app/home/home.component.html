@@ -1,0 +1,29 @@
+﻿<div class="container-fluid" style="height: 90vh;">
+  <h6>Welcome back {{ customerName }}</h6>
+  <h5>List of Accounts</h5>
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <td>Account Id</td>
+        <td>Bank IFSC</td>
+      </tr>
+      <tr>
+        <td>{{ account[0].accountId }}</td>
+        <td>{{ account[0].bankIfsc }}</td>
+
+        <td>
+          <button
+            class="btn btn-primary btn-group-lg"
+            (click)="checkBalance(account[0].accountId)"
+            type="button"
+          >
+            Check Balance
+          </button>
+        </td>
+        <td>
+          <div *ngIf="balanceFlag">{{ account.balance }} ZAR</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,121 @@
+<div
+  class="container-fluid"
+  [hidden]="transferSuccessfull"
+  style="padding-left: 21px; padding-right: 21px;"
+>
+  <form [formGroup]="transferForm">
+    <div class="col-sm-8 offset-sm-2">
+      <h2>Transfer Money</h2>
+      <div class="form-group">
+        <label>Name of Recepient *</label>
+        <input
+          type="text"
+          [class.is-invalid]="recipientName.invalid && recipientName.touched"
+          formControlName="recipientName"
+          class="form-control"
+        />
+        <div *ngIf="recipientName.invalid && recipientName.touched">
+          <small class="text-danger"
+            >Recipient name is required and must be atleast 5 characters</small
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Phone no. of Recepient </label>
+        <input
+          type="text"
+          [class.is-invalid]="phoneNo.invalid && phoneNo.touched"
+          formControlName="phoneNo"
+          class="form-control"
+        />
+        <div *ngIf="phoneNo.invalid && phoneNo.touched">
+          <small class="text-danger">Phone number must be valid</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Account No of Recepient *</label>
+        <input
+          type="text"
+          [class.is-invalid]="
+            recipientAccountNo.invalid && recipientAccountNo.touched
+          "
+          formControlName="recipientAccountNo"
+          class="form-control"
+        />
+        <div *ngIf="recipientAccountNo.invalid && recipientAccountNo.touched">
+          <small class="text-danger"
+            >Account no is required and must be valid</small
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Confirm Account No of Recepient *</label>
+        <input
+          type="password"
+          [class.is-invalid]="
+            confirmAccountNo.invalid && confirmAccountNo.touched
+          "
+          formControlName="confirmAccountNo"
+          class="form-control"
+        />
+        <div *ngIf="confirmAccountNo.invalid && confirmAccountNo.touched">
+          <small class="text-danger">Account no does not match</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Description </label>
+        <input
+          type="text"
+          formControlName="description"
+          [class.is-invalid]="description.invalid && description.touched"
+          class="form-control"
+        />
+
+        <div class="form-group">
+          <label>How much Money you want to transfer *</label>
+          <input type="text" formControlName="amount" class="form-control" />
+          <div *ngIf="amount.invalid && amount.touched">
+            <small class="text-danger"
+              >valid amount is required and must be less than 100000 ZAR</small
+            >
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Select Account from which to transfer</label>
+        <select formControlName="accountId" class="form-control">
+          <option
+            *ngFor="let account of accounts"
+            [value]="account.accountId"
+            >{{ account.accountId }}</option
+          >
+        </select>
+      </div>
+
+      <div>
+        <button
+          class="btn btn-primary"
+          (click)="onSubmit(1)"
+          [disabled]="!transferForm.valid"
+          type="submit"
+        >
+          Send Money</button
+        >&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <button class="btn btn-primary" (click)="cancelRequest()" type="button">
+          Cancel Transaction
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<div *ngIf="transferSuccessfull">
+  <h3>Money Transfered Successfully</h3>
+  <a class="nav-link" [routerLink]="['/transaction']" routerLinkActive="active"
+    >Do another Transaction</a
+  >
+</div>

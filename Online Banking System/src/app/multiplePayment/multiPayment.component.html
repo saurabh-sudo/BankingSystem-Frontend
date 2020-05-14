@@ -1,0 +1,84 @@
+<div
+  [hidden]="paymentSet"
+  [ngStyle]="{ border: '2px solid' + black }"
+  style="height: 90vh; padding-left: 21px; padding-right: 21px;"
+>
+  <div [hidden]="createSuccessful || accountApproved || accountDeclined">
+    <button
+      type="button"
+      class="btn btn-secondary btn-sm m-2"
+      (click)="addData()"
+    >
+      Add a new Recipient
+    </button>
+    <div [formGroup]="multiForm">
+      <div formArrayName="schedule">
+        <div class="container-fluid">
+          <div
+            class="form-group row"
+            *ngFor="let addressGroup of multiForm.get('schedule').controls"
+            [formGroup]="addressGroup"
+          >
+            <hr />
+
+            <div class="form-group col-4">
+              <label>Account No of Recipient *</label>
+              <input
+                type="text"
+                [attr.disabled]="authoriser ? '' : null"
+                formControlName="recipientAccountNo"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group col-4">
+              <label>How much Money you want to transfer *</label>
+              <input
+                type="text"
+                formControlName="amount"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group col-4">
+              <label>Select Account from which to transfer</label>
+              <select formControlName="accountId" class="form-control">
+                <option
+                  *ngFor="let account of accounts"
+                  [value]="account.accountId"
+                  >{{ account.accountId }}</option
+                >
+              </select>
+            </div>
+            <hr />
+          </div>
+          <hr />
+        </div>
+        <div>
+          <button
+            class="btn btn-primary"
+            [hidden]="!viewSaveButton"
+            (click)="onSubmit()"
+            [disabled]="!multiForm.valid"
+            type="submit"
+          >
+            Save</button
+          >&nbsp;&nbsp;&nbsp;&nbsp;
+
+          <button
+            class="btn btn-primary"
+            [hidden]="!viewSaveButton"
+            (click)="cancelRequest()"
+            type="button"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="paymentSet">
+  <h3>Amount paid Successfully</h3>
+  <a class="nav-link" [routerLink]="['/multiPayment']" routerLinkActive="active"
+    >Do another transaction</a
+  >
+</div>

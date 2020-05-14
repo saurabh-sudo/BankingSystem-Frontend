@@ -1,0 +1,74 @@
+<div class="container-fluid" style="padding-left: 21px; padding-right: 21px;">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.debug.js"></script>
+  <h6>Select the Date Range</h6>
+  <input
+    matInput
+    ngxDaterangepickerMd
+    placeholder="Choose date"
+    formControlName="selected"
+    [showCustomRangeLabel]="true"
+    [alwaysShowCalendars]="true"
+    [ranges]="ranges"
+    [showClearButton]="true"
+    [showCancel]="true"
+    [linkedCalendars]="false"
+    [isTooltipDate]="isTooltipDate"
+    [isInvalidDate]="isInvalidDate"
+    [locale]="{ applyLabel: 'Done' }"
+    [keepCalendarOpeningWithRange]="true"
+    [showRangeLabelOnInput]="true"
+    (rangeClicked)="rangeClicked($event)"
+    [(ngModel)]="selected"
+    class="form-control"
+    style="width: 40%; float: left;"
+    (datesUpdated)="datesUpdated($event)"
+    placeholder="click here for range"
+  />
+
+  &nbsp;&nbsp;&nbsp;
+  <button class="btn btn-primary" (click)="onSubmit($event)" type="button">
+    Search
+  </button>
+
+  <img
+    src="https://www.pngfind.com/pngs/m/350-3500642_pdf-icon-download-download-hd-png-download.png"
+    alt="image"
+    style="/* size: auto; */ height: 77px; float: right;"
+    (click)="generatePdf()"
+  />
+  &nbsp;&nbsp;
+
+  <img
+    src="https://png.pngtree.com/png-clipart/20190630/original/pngtree-csv-file-document-icon-png-image_4166827.jpg"
+    alt="image"
+    style="/* size: auto; */ height: 77px; float: right;"
+    (click)="generateCsv()"
+  />
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Transaction Id</th>
+        <th>Date</th>
+        <th>Transfer from</th>
+        <th>Transfer to</th>
+        <th>Receipient Name</th>
+        <th>Amount</th>
+        <th>Status</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let transaction of transactionListFiltered">
+        <td>{{ transaction.id }}</td>
+        <td>{{ transaction.date.toLocaleString() }}</td>
+        <td>{{ transaction.accountId }}</td>
+        <td>{{ transaction.recipientAccountNo }}</td>
+        <td>{{ transaction.recipientName }}</td>
+        <td>{{ transaction.amount }} ZAR</td>
+        <td>{{ transaction.status }}</td>
+        <td>{{ transaction.type }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
