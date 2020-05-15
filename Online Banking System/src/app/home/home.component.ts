@@ -43,6 +43,5 @@ export class HomeComponent implements OnInit {
       (error) => console.log(error)
     );
     this.balanceFlag = true;
-    console.log(this.result);
   }
 }

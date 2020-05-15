@@ -32,7 +32,6 @@ export class UserService {
       // "Uuid",
       // "Remarks",
     ]);
-    console.log(csvData);
     let blob = new Blob(["\ufeff" + csvData], {
       type: "text/csv;charset=utf-8;",
     });
@@ -68,14 +67,11 @@ export class UserService {
       let line = i + 1 + "";
       for (let index in headerList) {
         const proof = array[i]["proof"];
-        console.log(proof);
-        console.log(array[i][proof.uuid]);
         let head = headerList[index];
 
         if (head.includes("uuid") || head.includes("passportNumber")) {
           line += "," + proof[head];
         } else {
-          console.log(":eske");
           line += "," + array[i][head];
         }
         //   line += "," + array[i][head];

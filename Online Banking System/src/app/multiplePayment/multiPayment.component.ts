@@ -45,13 +45,10 @@ export class MultiPaymentComponent implements OnInit {
   }
 
   cancelRequest() {
-    console.log("cancel");
-
     this.router.navigate(["/"]);
   }
 
   ngOnInit() {
-    console.log("ngoninit");
     let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
     this.accounts = currentUser["accounts"];
 
@@ -86,7 +83,6 @@ export class MultiPaymentComponent implements OnInit {
     this.userService.MultiplePayment(this.multiForm.value).subscribe(
       (response) => {
         this.paymentSet = true;
-        console.log("scheduled");
       },
 
       (error) => console.error("Error while create new account is : ", error)

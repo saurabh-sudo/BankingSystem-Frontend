@@ -71,19 +71,15 @@ export class ScheduleComponent implements OnInit {
   }
 
   ValidateDate(control: AbstractControl) {
-    console.log(control.value);
     if (!control.value.startsWith("https") || !control.value.includes(".io")) {
       return { validUrl: true };
     }
     return null;
   }
   cancelRequest() {
-    console.log("cancel");
-
     this.router.navigate(["/"]);
   }
   ngOnInit() {
-    console.log("ngoninit");
     let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
     this.accounts = currentUser["accounts"];
     this.UserAccountId = this.accounts[0]["accountId"];
@@ -91,8 +87,6 @@ export class ScheduleComponent implements OnInit {
     this.userService.getBalanceAmountOnly(this.UserAccountId).subscribe(
       (res) => {
         this.presentAmount = JSON.parse(JSON.stringify(res));
-
-        console.log(this.presentAmount);
       },
       (error) => console.log(error)
     );
@@ -113,8 +107,6 @@ export class ScheduleComponent implements OnInit {
     return this.scheduleForm.get("accountId");
   }
   get amount() {
-    console.log("getamiunt", this.scheduleForm.get("schedule.amount"));
-
     return this.scheduleForm.get("schedule.amount");
   }
 
@@ -155,7 +147,6 @@ export class ScheduleComponent implements OnInit {
     this.userService.scheduleTransaction(this.scheduleForm.value).subscribe(
       (response) => {
         this.scheduleComplete = true;
-        console.log("scheduled");
       },
 
       (error) => console.error("Error while create new account is : ", error)

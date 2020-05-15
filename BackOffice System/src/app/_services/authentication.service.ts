@@ -15,8 +15,6 @@ export class AuthenticationService {
   constructor(private http: HttpClient, private router: Router) {}
 
   login(username: string, password: string) {
-    console.log(btoa(username + ":" + password));
-
     return this.http
       .post<any>(`${config.apiUrl}/login/api/secured/token`, null, {
         headers: {
@@ -27,7 +25,6 @@ export class AuthenticationService {
         map((user) => {
           if (user) {
             this.loggedIn.next(true);
-            console.log(user);
 
             sessionStorage.setItem("currentUser", JSON.stringify(user));
           } else {
@@ -88,7 +85,6 @@ export class AuthenticationService {
       .pipe(
         map((user) => {
           if (user) {
-            console.log(user);
           } else {
             console.log("Username or password is Incorrect");
           }

@@ -129,8 +129,6 @@ export class CreateComponent implements OnInit {
   }
 
   cancelRequest() {
-    console.log("cancel");
-
     this.router.navigate(["/"]);
   }
 
@@ -148,7 +146,6 @@ export class CreateComponent implements OnInit {
     }
 
     if (Number(this.userId) != null && Number(this.userId) == 0) {
-      console.log(this.registrationForm.value);
       this.authenticationService
         .createNewAccount(this.registrationForm.value)
         .subscribe(

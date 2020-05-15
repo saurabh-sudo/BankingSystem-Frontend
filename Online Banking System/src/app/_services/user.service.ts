@@ -96,7 +96,6 @@ export class UserService {
         "type",
       ]
     );
-    console.log(csvData);
     let blob = new Blob(["\ufeff" + csvData], {
       type: "text/csv;charset=utf-8;",
     });
@@ -136,8 +135,6 @@ export class UserService {
       let line = i + 1 + "";
       for (let index in headerListobject) {
         let head = headerListobject[index];
-
-        console.log(":eske");
         line += "," + array[i][head];
       }
       str += line + "\r\n";

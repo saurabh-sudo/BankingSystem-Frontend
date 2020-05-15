@@ -28,8 +28,6 @@ export class HomeComponent implements OnInit {
     private router: Router
   ) {
     this.route.params.subscribe((params) => {
-      console.log("sersef");
-      // this.paramsChange(params.id);
       this.ngOnInit();
     });
   }
@@ -92,7 +90,6 @@ export class HomeComponent implements OnInit {
     data.forEach((elm) => {
       const proof = elm["proof"];
 
-      console.log(proof);
       const temp = [
         elm["accountId"],
         elm["id"],
@@ -104,7 +101,6 @@ export class HomeComponent implements OnInit {
         elm["remarks"],
       ];
       rows.push(temp);
-      console.log("Rows", rows); // showing all data
     });
 
     doc.text(20, 20, this.fileName);

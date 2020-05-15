@@ -69,8 +69,6 @@ export class TransactionHistory implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.route.params.subscribe((params) => {
-      console.log("sersef");
-      // this.paramsChange(params.id);
       this.ngOnInit();
     });
   }
@@ -88,9 +86,7 @@ export class TransactionHistory implements OnInit {
     }
   };
 
-  rangeClicked(range: any): void {
-    console.log("[rangeClicked] range is : ", range);
-  }
+  rangeClicked(range: any): void {}
 
   ngOnInit() {
     this.hideData = false;
@@ -100,7 +96,6 @@ export class TransactionHistory implements OnInit {
     this.nav.isUserLoggedIn.next(true);
     var statusValue;
 
-    console.log("Ads");
     let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
     this.accounts = currentUser["accounts"];
     let ad = this.accounts[0];
@@ -123,21 +118,8 @@ export class TransactionHistory implements OnInit {
           //  var n = d.toLocaleString();
           abc["date"] = d.toLocaleString();
 
-          console.log(abc["date"]);
           this.transactionList[i] = abc;
         }
-        // this.transactionList = this.transactionList.map((p) =>
-        //   p["date"] === p["date"]
-        //     ? {
-        //         ...p,
-        //         // var d7 :new Date("2020-04-13T07:59:42.843+0000");
-        //         // var n = d.toLocaleString();
-        //         date: p["date"].toLocaleString(),
-        //       }
-        //     : p
-        // );
-
-        console.log("Error in getAll is : ", this.transactionList);
 
         this.transactionList.sort((a, b) => Number(b["id"]) - Number(a["id"]));
         this.transactionListFiltered = this.transactionList;
@@ -167,7 +149,6 @@ export class TransactionHistory implements OnInit {
     data.forEach((elm) => {
       const proof = elm["proof"];
 
-      console.log(proof);
       const temp = [
         elm["id"],
         elm["date"],
@@ -179,7 +160,6 @@ export class TransactionHistory implements OnInit {
         elm["type"],
       ];
       rows.push(temp);
-      console.log("Rows", rows); // showing all data
     });
 
     doc.text(20, 20, this.fileName);
@@ -196,23 +176,11 @@ export class TransactionHistory implements OnInit {
   }
 
   onSubmit(range: any) {
-    // console.log(range.startDate._d);
-    // console.log(range.endDate._d);
     this.filterData = true;
 
     var startDate = new Date(this.startDate);
     var endDate = new Date(this.endDate);
 
-    // this.startDate.toLoca
-
-    // var startDate = new Date(this.startDate).toLocaleString();
-
-    // var startDate = new Date(this.startDate);
-    // startDate=startDate.toLocaleString();
-    // var startDateu=new Date(startDate);
-
-    // var endDate = new Date(this.endDate).toLocaleString();
-    debugger;
     this.transactionListFiltered = this.transactionList.filter(function (a) {
       // var hitDates = a["date"] || {};
 
@@ -229,7 +197,6 @@ export class TransactionHistory implements OnInit {
       //   });
       //   return hitDateMatchExists;
     });
-    console.log("3234", this.transactionList);
 
     // result = this.accounts.filter((obj1) => {
     //     return obj1["id"] == accountId;
@@ -242,8 +209,6 @@ export class TransactionHistory implements OnInit {
   }
 
   datesUpdated(range: any) {
-    console.log(range.startDate._d);
-    console.log(range.endDate._d);
     this.startDate = range.startDate._d;
     this.endDate = range.endDate._d;
   }

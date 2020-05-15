@@ -45,9 +45,6 @@ export class TransactionComponent implements OnInit {
     let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
     this.accounts = currentUser["accounts"];
 
-    console.log(this.accounts);
-
-    // this.userId = this.route.snapshot.paramMap.get("id");
     this.transferForm = this.fb.group(
       {
         recipientName: ["", [Validators.required, Validators.minLength(5)]],
@@ -110,7 +107,6 @@ export class TransactionComponent implements OnInit {
   }
 
   cancelRequest() {
-    console.log("cancel");
     this.router.navigate(["/"]);
   }
 
